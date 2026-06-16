@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GEOG-349 Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-weight/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg-color: #262626;
+        --card-bg: #50563f;
+        --card-bg-alt: #ded1c5;
+        --border-color: #2d3122;
+        --text-main: #e9e2dc;
+        --text-muted: #e9e2dc;
+        --text-body: #e9e2dc;
+        --text-alt: #2d3122;
+        --accent-cyan: #a6b479;
+        --accent-purple: #878578;
+        --accent-yellow: #e9e2dc;
+        --accent-orange: #6c5940;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-body);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        line-height: 1.6;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* --- HERO HEADER --- */
+      header {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 40px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .project-tag {
+        font-family: monospace;
+        color: var(--accent-cyan);
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+
+      h1 {
+        color: var(--text-main);
+        font-size: 38px;
+        font-weight: 800;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+      }
+
+      .lead-text {
+        color: var(--text-body);
+        font-size: 18px;
+        margin-bottom: 24px;
+      }
+
+      /* --- DASHBOARD STRUCTURES --- */
+      .section-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      }
+
+      .section-card-alt {
+        background-color: var(--card-bg-alt);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      }
+
+      .card-header {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .header-text-block {
+        flex-grow: 1;
+      }
+
+      .card-title {
+        color: var(--text-main);
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 4px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .card-title i {
+        color: var(--accent-cyan);
+        font-size: 20px;
+      }
+
+      .card-subtitle {
+        color: var(--text-muted);
+        font-size: 18px;
+      }
+
+      .section-card-alt .card-title {
+        color: var(--text-alt);
+      }
+
+      .section-card-alt .card-subtitle {
+        color: var(--text-alt);
+      }
+
+      /* --- OPEN FULLSCREEN INLINE ACTION LINK --- */
+      .fullscreen-btn {
+        background-color: #3b3f2d;
+        border: 1px solid var(--border-color);
+        padding: 8px 14px;
+        border-radius: 4px;
+        color: var(--text-main);
+        font-size: 11px;
+        font-family: monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+        transition: all 0.2s;
+        align-self: flex-start;
+      }
+
+      .fullscreen-btn:hover {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+        box-shadow: 0 0 8px rgba(134, 149, 83, 0.3);
+      }
+
+      /* --- INTERACTIVE ENGINE SWITCH PILLS --- */
+      .engine-switch-container {
+        background: #3b3f2d; /* Pine Tree Contrast Box */
+        border: 1px solid var(--border-color);
+        padding: 4px;
+        border-radius: 6px;
+        display: inline-flex;
+        gap: 4px;
+        flex-shrink: 0;
+      }
+
+      .switch-tab {
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        font-size: 11px;
+        font-family: monospace;
+        font-weight: bold;
+        padding: 6px 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .switch-tab.active {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        color: var(--accent-cyan);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      }
+
+      .switch-tab:hover:not(.active) {
+        color: var(--text-main);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      /* --- RESPONSIVE CONTAINERS --- */
+      .iframe-container {
+        width: 100%;
+        height: 620px;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        background-color: #3b3f2d;
+        margin-bottom: 20px;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .split-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      .split-grid-one-two {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      @media (max-width: 950px) {
+        .split-grid {
+          grid-template-columns: 1fr;
+        }
+        .card-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+        .engine-switch-container {
+          width: 100%;
+          justify-content: stretch;
+        }
+        .switch-tab {
+          flex: 1;
+          text-align: center;
+        }
+      }
+
+      .stats-image-container {
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: #3b3f2d;
+        padding: 10px;
+        color: var(--text-muted);
+        font-size: 12px;
+      }
+
+      .stats-image-container a {
+        color: var(--accent-cyan);
+        text-decoration: none;
+      }
+
+      .stats-image-container img {
+        width: 100%;
+        display: block;
+        height: auto;
+        margin-bottom: 8px;
+      }
+
+      .narrative-box p {
+        margin-bottom: 16px;
+        font-size: 18px;
+        color: var(--text-body);
+        text-align: justify;
+      }
+
+      .narrative-box strong {
+        color: var(--text-main);
+        border-bottom: 1px dashed var(--accent-cyan);
+      }
+
+      .narrative-box-alt p {
+        margin-bottom: 16px;
+        font-size: 18px;
+        color: var(--text-alt);
+        text-align: justify;
+      }
+
+      .narrative-box-alt strong {
+        color: var(--text-alt);
+        border-bottom: 1px dashed var(--accent-cyan);
+      }
+
+      /* --- IMAGES GRAPHICS PANEL MATRICES --- */
+      .chart-matrix-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .activity-matrix-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      @media (max-width: 900px) {
+        .chart-matrix-grid,
+        .activity-matrix-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .matrix-img-card {
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: #3b3f2d;
+      }
+
+      a {
+        color: var(--accent-cyan);
+        text-decoration: none;
+      }
+
+      .matrix-img-card img {
+        width: 100%;
+        display: block;
+        height: auto;
+      }
+
+      .matrix-caption {
+        padding: 12px;
+        background-color: #3b3f2d;
+        border-top: 1px solid var(--border-color);
+        font-size: 11.5px;
+        color: var(--text-muted);
+        font-family: monospace;
+        text-align: center;
+      }
+
+      /* --- ACCORDION INTERACTION OVERLAYS --- */
+      .accordion-item {
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 12px;
+        background-color: #3b3f2d;
+      }
+
+      .accordion-trigger {
+        width: 100%;
+        padding: 16px 20px;
+        background: #20231b; /* Darkened Pine Accent */
+        border: none;
+        color: var(--text-main);
+        font-size: 14px;
+        font-weight: 600;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .accordion-trigger:hover {
+        background: #3b3f2d;
+      }
+
+      .accordion-content {
+        padding: 20px;
+        border-top: 1px solid var(--border-color);
+        display: none;
+        font-size: 13.5px;
+        color: var(--text-body);
+      }
+
+      .accordion-content ul {
+        margin-left: 20px;
+        margin-top: 8px;
+      }
+
+      .accordion-content li {
+        margin-bottom: 6px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 40px 0 10px 0;
+        font-size: 11px;
+        color: var(--text-muted);
+        font-family: monospace;
+        border-top: 1px solid var(--border-color);
+        margin-top: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="project-tag">GEOG-349: Portfolio</div>
+        <h1>
+          An Exploration of Raccon Dog Movements<br />in the Southwest
+          Archipelago of Finland
+        </h1>
+        <p class="lead-text">
+          A cartographic portfolio that looks at movements of invasive raccoon
+          dogs between islands in southwest Finland. The portfolio focuses on
+          the map design choices that were made to create a cohesive and
+          visually compelling narrative.
+        </p>
+      </header>
+
+      <div class="section-card">
+        <div class="card-header">
+          <div class="header-text-block">
+            <div class="card-title">Introduction and Motivation</div>
+          </div>
+        </div>
+        <div class="narrative-box">
+          <p>
+            The <strong>raccoon dog</strong> (Nyctereutes procyonoides) is an
+            invasive species that causes major problems for native birds in the
+            Finnish archipelago.
+          </p>
+          <p>
+            This portfolio is based on a dataset collected by Toivonen, Toivola,
+            and Selonen (2025). They collected data via GPS tracking collars,
+            investigating how the behaviour of raccoon dogs change when ice
+            forms over the sea, as this allows the animals to more easily cross
+            water. I chose this dataset as I recently came across the
+            accompanying paper and am very interested in invasive species, hence
+            I wanted to explore the dataset myself.
+          </p>
+        </div>
+        <div class="split-grid-one-two">
+          <div class="stats-image-container">
+            <img src="results/raccoondog.jpg" alt="Raccoon dog" />
+            <a
+              href="https://commons.wikimedia.org/wiki/File:%D0%84%D0%BD%D0%BE%D1%82%D0%BE%D0%B2%D0%B8%D0%B4%D0%BD%D0%B8%D0%B9_%D1%81%D0%BE%D0%B1%D0%B0%D0%BA%D0%B0_(Nyctereutes_procyonoides).jpg"
+              >Ryzhkov Sergey</a
+            >,
+            <a href="https://creativecommons.org/licenses/by-sa/4.0"
+              >CC BY-SA 4.0</a
+            >, via Wikimedia Commons
+          </div>
+          <div>
+            <div class="narrative-box">
+              <p>
+                The Raccoon Dog Movement Dataset consists of time-stamped
+                location records (latitude, longitude, and precision metadata),
+                collected with GPS collars attached on 30 individual raccoon
+                dogs. Additionally, this portfolio uses daily sea-ice
+                concentration grids from the Copernicus Marine Data Store,land
+                boundaries from Finnish Environment Institute (SYKE) and
+                elevation data from National Land Survey of Finland for
+                visualization and environmental context.
+                <a href="#appendix">[See links]</a>
+              </p>
+              <p>
+                This portfolio explores different visualizations of the dataset,
+                not directly related to the paper itself. In particular, I was
+                interested in exploring ways to clearly visualize the paths as
+                animals tend to move back and forth. This creates overlapping
+                patterns that are difficult to interpret with simple
+                point-to-point lines.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card-alt">
+        <div class="card-header">
+          <div class="header-text-block">
+            <div class="card-title">Overview Map</div>
+          </div>
+        </div>
+
+        <div class="split-grid-one-two">
+          <div class="narrative-box-alt">
+            <div class="narrative-box-alt">
+              <p>
+                This map shows the total amount of signals recorded per square
+                meter, across the southwest archipelago. It provides
+                geographical context and a gives us a better idea of the spread
+                of the dataset. While the
+              </p>
+              <p>
+                In the lectures we discussed the importance of picking the right
+                projection. This was particularly important in this map, as I
+                wanted to minimize the distortion of the small islands. Picking
+                a metric projection also makes the map easier to read,
+                particularly combined with the grid that I applied.
+              </p>
+              <p>
+                The type of environment is a challenge in this dataset, as
+                putting names on the hundreds of small islands makes the map
+                cluttered. Instead I have focused on providing other context
+                clues in my maps (in this map the grid, later eg. by enabling
+                zooming).
+              </p>
+              <p>
+                The concept of Data-Ink Ratio from one of the lectures was
+                particularly on my mind in this aspect. The idea was to use a
+                very simple basemap for the maps to avoid clutter, while still
+                showing the islands as context.
+              </p>
+            </div>
+          </div>
+          <div class="matrix-img-card"><img src="results/overview.png" /></div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="card-header">
+          <div class="header-text-block">
+            <div class="card-title">
+              Edge-bundled Travel Frequencies Between Individual Islands
+            </div>
+          </div>
+          <a
+            href="results/edgebundled.html"
+            class="fullscreen-btn"
+            target="_blank"
+          >
+            <i class="fas fa-expand"></i> Open Fullscreen
+          </a>
+        </div>
+
+        <div class="iframe-container">
+          <iframe src="results/edgebundled.html"></iframe>
+        </div>
+
+        <div class="split-grid">
+          <div class="narrative-box">
+            <p>
+              Edge-bundling was one of the most interesting ideas I learned
+              about in this course, hence I wanted to explore it in this final
+              project as well. In this map the discussion from the lectures on
+              categorization was also helpful, as the weights of the bundled
+              paths is highly skewed (as seen in the histogram as well).
+            </p>
+            <p>
+              The interactivity of this map allows for showing the entire area
+              at once. In a static map the spread of the data would make each
+              path difficult to track, but by formatting this as an html map the
+              user can zoom and pan to areas of interest.
+            </p>
+            <p>
+              With the histogram, this map also allowed me to explore how to use
+              other visualizations as supporting material for the map.
+            </p>
+            <div class="narrative-box"></div>
+          </div>
+          <div class="matrix-img-card">
+            <img src="results/edgebundled-stats.png" />
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="card-header">
+          <div class="header-text-block">
+            <div class="card-title">Individual Behavior Maps</div>
+            <div class="card-subtitle">
+              Small scale interactive maps to show paths of particular raccoon
+              dog individuals.
+            </div>
+          </div>
+          <div style="display: flex; gap: 15px; align-items: center">
+            <div class="engine-switch-container">
+              <button
+                class="switch-tab active"
+                id="lcpTab"
+                onclick="switchMicroEngine('lcp')"
+              >
+                Least Cost Path
+              </button>
+              <button
+                class="switch-tab"
+                id="heroTab"
+                onclick="switchMicroEngine('hero')"
+              >
+                Direct Path
+              </button>
+            </div>
+            <a
+              href="results/lcp.html"
+              id="fullscreenToggleBtn"
+              class="fullscreen-btn"
+              target="_blank"
+            >
+              <i class="fas fa-expand"></i> Open Fullscreen
+            </a>
+          </div>
+        </div>
+
+        <div class="iframe-container">
+          <iframe id="microEngineIframe" src="results/lcp.html"></iframe>
+        </div>
+
+        <div class="narrative-box">
+          <div class="narrative-box">
+            <p>
+              The previous maps are very zoomed out, showing trends for the
+              entire dataset. In these maps I explore path visualization more
+              closely, choosing two particular individuals (R3 and R13). The
+              temporal/interactive aspect is particularly important in these
+              maps, as showing the full path at once is very messy.
+            </p>
+          </div>
+        </div>
+        <div class="split-grid-one-two">
+          <div class="matrix-img-card">
+            <img
+              src="results/activity.png"
+              alt="Behavioral Accelerometer Core Matrix Signatures"
+            />
+          </div>
+          <div class="narrative-box">
+            <p>
+              There are two versions of the map: Least-Cost Path (LCP) and
+              Direct path (toggle above the maps). The LCP algorithm uses
+              elevation data fetched via National Land Survey of Finland to
+              compute the best trajectories with Dijkstras algorithm. The LCP
+              algorithm used is very simple, but the idea was to show the
+              difference that a more "natural" path makes.
+            </p>
+            <p>
+              I assigned different colors for each individual, which is carried
+              on in the Seasonal Mobility chart as well. This keeps the
+              narrative consistent and makes the Mobility chart feel connected
+              to the maps.
+            </p>
+            <p>
+              I chose a red color for one of the individuals, as I think it fits
+              the overall color scheme of my portfolio. However, I took
+              particular care to not use red and green in the same
+              visualizations, to make them more color blind friendly.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="card-header">
+          <div class="header-text-block">
+            <div class="card-title">
+              Seasonal Movement Analysis & Conclusions
+            </div>
+            <div class="card-subtitle">
+              This section includes two interesting chart visualizations, which
+              show distributions. Time series and distribution data like this is
+              not always very intuitive in map format, but provides context and
+              material for analysis in combination with the maps.
+            </div>
+          </div>
+        </div>
+        <div class="activity-matrix-grid">
+          <div class="matrix-img-card">
+            <img
+              src="results/islandvisits2.png"
+              alt="Proportion of Population Movements"
+            />
+          </div>
+          <div class="matrix-img-card">
+            <img
+              src="results/islandvisits3.png"
+              alt="Monthly Ice vs Water Transit Volume"
+            />
+          </div>
+        </div>
+        <div class="narrative-box">
+          <p><strong>Conclusions</strong></p>
+          <p>
+            From the maps we can see that raccoon dogs move fairly locally, not
+            moving across the entire study are but instead staying fairly
+            clustered among a few islands. From the edge bundling map we can see
+            that some islands are visited often, while many are only visited a
+            once or twice.
+          </p>
+          <p>
+            On an individual scale, the maps show big differences. Some
+            individuals like R3 traverse a lot of different islands, whereas
+            some (like R13) remain largely on one larger island. Interestingly,
+            the Seasonal Mobility chart shows that the individual that move
+            across many islands tends to move longer distances in the winter
+            when the water is covered in ice, whereas R13 moves longer distances
+            in the late summer.
+          </p>
+          <p>
+            The chart visualizations show that travel distances are longer over
+            ice, which indicates that ice helps the invasive species spread
+            further. This conclusion is also supported by the paper by Toivonen
+            et al. (2025).
+          </p>
+        </div>
+      </div>
+
+      <div class="section-card-alt">
+        <div class="card-header">
+          <div class="header-text-block">
+            <div class="card-title">Full Dataset Playback</div>
+          </div>
+          <a href="results/ghost.html" class="fullscreen-btn" target="_blank">
+            <i class="fas fa-expand"></i> Open Fullscreen
+          </a>
+        </div>
+        <div class="narrative-box-alt">
+          <p>
+            The final map in my portfolio is a playback of the entire dataset,
+            drawing the paths of all individuals. The map uses a more colorful
+            palette, which is muted to not be too jarring in my otherwise quite
+            earthy color palette. The colorful palette is deliberate to easily
+            distinguish the individuals.
+          </p>
+        </div>
+
+        <div class="iframe-container" style="height: 680px">
+          <iframe src="results/ghost.html"></iframe>
+        </div>
+      </div>
+
+      <div class="section-card" id="appendix">
+        <div class="card-header">
+          <div class="header-text-block">
+            <div class="card-title">References & Data Sources</div>
+          </div>
+        </div>
+        <div class="narrative-box">
+          <strong
+            >Paper used as inspiration and raccoon dog data source:
+          </strong>
+          <p>
+            Toivonen, P., Toivola, M., & Selonen, V. (2025). Ice cover and
+            partner removal increase movements of invasive mesopredator in the
+            coastal island mosaic. Ecological Solutions and Evidence, 6, e70068.
+            https://doi.org/10.1002/2688-8319.70068
+          </p>
+          <strong>Data sources:</strong>
+          <ul style="padding: 0px 30px">
+            <li>
+              <a
+                href="https://www.movebank.org/cms/webapp?gwt_fragment=page%3Dstudies%2Cpath%3Dstudy4656276921"
+                target="_blank"
+                >Raccoon Dog Movements</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://asiointi.maanmittauslaitos.fi/karttapaikka/?lang=en"
+                target="_blank"
+                >Elevation data</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.syke.fi/fi/ymparistotieto/ladattavat-paikkatietoaineistot#ranta10"
+                target="_blank"
+                >Ranta10 (land boundaries)</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://data.marine.copernicus.eu/product/SEAICE_BAL_SEAICE_L4_NRT_OBSERVATIONS_011_004/description"
+                target="_blank"
+                >Ice sheet data</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <footer>
+        Fun fact: Despite being canids, raccoon dogs sound more like cats.
+      </footer>
+    </div>
+
+    <script>
+      function switchMicroEngine(targetEngineKey) {
+        const iframe = document.getElementById("microEngineIframe");
+        const lcpTab = document.getElementById("lcpTab");
+        const heroTab = document.getElementById("heroTab");
+        const fullscreenBtn = document.getElementById("fullscreenToggleBtn");
+
+        if (targetEngineKey === "lcp") {
+          iframe.src = "results/lcp.html";
+          lcpTab.classList.add("active");
+          heroTab.classList.remove("active");
+          fullscreenBtn.href = "results/lcp.html";
+        } else if (targetEngineKey === "hero") {
+          iframe.src = "results/hero.html";
+          heroTab.classList.add("active");
+          lcpTab.classList.remove("active");
+          fullscreenBtn.href = "results/hero.html";
+        }
+      }
+    </script>
+  </body>
+</html>
